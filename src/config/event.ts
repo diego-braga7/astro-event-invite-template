@@ -24,12 +24,12 @@ export interface EventConfig {
 const env = import.meta.env;
 
 export const event: EventConfig = {
-  nome_da_crianca: 'Nome da Criança',
+  nome_da_crianca: env.PUBLIC_EVENT_NAME ?? 'Nome da Criança',
   idade: 5,
-  data: '00/00/2026',
-  horario: '00:00',
-  endereco: 'Rua Exemplo, 123 — Bairro',
-  cidade: 'Sua Cidade — UF',
+  data: env.PUBLIC_EVENT_DATE ?? '00/00/2026',
+  horario: env.PUBLIC_EVENT_TIME ?? '00:00',
+  endereco: env.PUBLIC_EVENT_ADDRESS ?? 'Rua Exemplo, 123 — Bairro',
+  cidade: env.PUBLIC_EVENT_CITY ?? 'Sua Cidade — UF',
   google_maps_link: env.PUBLIC_EVENT_GOOGLE_MAPS_LINK ?? 'https://maps.google.com/?q=SEU_ENDERECO_AQUI',
   whatsapp_link:
     env.PUBLIC_EVENT_WHATSAPP_LINK ??
