@@ -34,8 +34,8 @@ const { targetDate } = Astro.props;
 <script>
   class CountdownController {
     container: HTMLElement;
-    targetDate: number;
-    elements: {
+    targetDate!: number;
+    elements!: {
       days: HTMLElement | null;
       hours: HTMLElement | null;
       minutes: HTMLElement | null;
