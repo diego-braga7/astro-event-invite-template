@@ -33,7 +33,7 @@ Pré-requisitos: Node.js (LTS) e npm instalados.
 
 1.  **Clone o repositório (ou baixe os arquivos):**
     ```bash
-    git clone https://github.com/seu-usuario/astro-event-invite-template.git
+    git clone git@github.com:diego-braga7/astro-event-invite-template.git
     cd astro-event-invite-template
     ```
 
