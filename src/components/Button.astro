@@ -1,0 +1,51 @@
+---
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+export interface Props {
+  href?: string;
+  target?: string;
+  rel?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none';
+
+const variants: Record<ButtonVariant, string> = {
+  primary: 'bg-primary text-white hover:bg-primary/90',
+  secondary: 'bg-secondary text-white hover:bg-secondary/90',
+  ghost: 'bg-white/0 text-slate-900 hover:bg-slate-900/5 border border-slate-200'
+};
+
+const sizes: Record<ButtonSize, string> = {
+  sm: 'px-3 py-2 text-sm',
+  md: 'px-4 py-2.5 text-sm',
+  lg: 'px-5 py-3 text-base'
+};
+
+const classes = [base, variants[variant], sizes[size], className].filter(Boolean).join(' ');
+---
+
+{
+  href ? (
+    <a href={href} class={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button class={classes} type="button" {...rest}>
+      <slot />
+    </button>
+  )
+}
+

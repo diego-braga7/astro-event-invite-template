@@ -1,0 +1,27 @@
+---
+import Layout from '../components/Layout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import Button from '../components/Button.astro';
+import { event } from '../config/event';
+---
+
+<Layout title="Contato" description="Contato e observações importantes.">
+  <Section title="Contato" description="Fale com a família para dúvidas e observações.">
+    <div class="grid gap-4 lg:grid-cols-2">
+      <InfoCard title="WhatsApp">
+        <p>Fale direto pelo WhatsApp.</p>
+        <div class="mt-3">
+          <Button href={event.whatsapp_link} target="_blank" rel="noreferrer" variant="secondary">
+            Abrir WhatsApp
+          </Button>
+        </div>
+      </InfoCard>
+
+      <InfoCard title="Observações">
+        <p>Se houver alergias, restrições alimentares ou necessidades especiais, avise com antecedência.</p>
+      </InfoCard>
+    </div>
+  </Section>
+</Layout>
+

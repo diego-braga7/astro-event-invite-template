@@ -1,0 +1,35 @@
+---
+import Layout from '../components/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import Button from '../components/Button.astro';
+import { event } from '../config/event';
+---
+
+<Layout title="Convite" description={event.texto_convite}>
+  <Hero ctaHref="/confirmar" />
+
+  <Section
+    title="Informações rápidas"
+    description="Edite tudo em src/config/event.ts para aplicar no site inteiro."
+  >
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <InfoCard title="Quando">
+        <p>
+          {event.data} às {event.horario}
+        </p>
+      </InfoCard>
+      <InfoCard title="Onde">
+        <p>{event.endereco}</p>
+        <p class="mt-1">{event.cidade}</p>
+      </InfoCard>
+      <InfoCard title="RSVP">
+        <p>Confirme sua presença para ajudar na organização.</p>
+        <div class="mt-3">
+          <Button href="/confirmar" variant="secondary">Confirmar presença</Button>
+        </div>
+      </InfoCard>
+    </div>
+  </Section>
+</Layout>
