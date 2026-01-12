@@ -1,75 +1,114 @@
-# Convite de Aniversário (Astro • Static • Tailwind)
+# 🎂 Astro Event Invite Template
 
-Projeto estático (build para `dist/`) pensado para deploy em hospedagem compartilhada (cPanel/HostGator), com conteúdo centralizado em arquivos de configuração para facilitar a troca de template visual.
+![Astro](https://img.shields.io/badge/astro-%232C2052.svg?style=for-the-badge&logo=astro&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-## Requisitos
+Um template moderno, responsivo e de alta performance para convites de eventos e aniversários. Desenvolvido com **Astro** e **Tailwind CSS**, este projeto gera um site totalmente estático, leve e fácil de hospedar em qualquer lugar.
 
-- Node.js LTS
-- npm
+> **Nota:** Este projeto é focado na simplicidade e personalização via arquivos de configuração. Não requer banco de dados.
 
-## Comandos
+---
 
-```bash
-npm install
-npm run dev
-npm run build
-npm run preview
-```
+## ✨ Funcionalidades
 
-## Estrutura
+- **⚡ Ultra Rápido:** Site estático gerado com Astro (Zero JS runtime onde não é necessário).
+- **📱 Responsivo:** Layout adaptável para Celulares, Tablets e Desktop (Mobile-first).
+- **🎨 Tailwind CSS v4:** Estilização moderna e fácil de manter.
+- **📅 Contagem Regressiva:** Componente de countdown automático para a data do evento.
+- **🖼️ Galeria de Fotos:** Grid de fotos com modal interativo e visualização em tela cheia.
+- **📍 RSVP Simples:** Integração fácil com links externos (Google Forms, WhatsApp, etc).
+- **🗺️ Mapa e Localização:** Seção dedicada para detalhes do local e horários.
+- **🔍 SEO & Sitemap:** Otimizado para motores de busca com geração automática de sitemap.
 
-- Páginas (rotas): `src/pages/*.astro`
-- Componentes: `src/components/*.astro`
-- Config (conteúdo): `src/config/*.ts`
-- Imagens e favicon: `public/`
+## 🚀 Tecnologias Utilizadas
 
-## Editar dados do evento
+- [Astro](https://astro.build) (v5.16+)
+- [Tailwind CSS](https://tailwindcss.com) (v4.0+)
+- [Prettier](https://prettier.io) (Formatação de código)
 
-Edite o arquivo [event.ts](file:///home/diego/projetos/astro-event-invite-template/src/config/event.ts).
+## 🛠️ Instalação e Uso
 
-- RSVP padrão: link externo (Google Forms) em `event.rsvp.externalUrl`
-- Modo RSVP: `event.rsvp.mode` (`external` ou `api`)
+Pré-requisitos: Node.js (LTS) e npm instalados.
 
-## Trocar fotos da galeria
+1.  **Clone o repositório (ou baixe os arquivos):**
+    ```bash
+    git clone https://github.com/seu-usuario/astro-event-invite-template.git
+    cd astro-event-invite-template
+    ```
 
-1. Coloque as fotos em `public/images/gallery/` (veja o README da pasta).
-2. Atualize a lista em [gallery.ts](file:///home/diego/projetos/astro-event-invite-template/src/config/gallery.ts).
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
 
-## SEO básico e sitemap
+3.  **Inicie o servidor de desenvolvimento:**
+    ```bash
+    npm run dev
+    ```
+    Acesse `http://localhost:4321` no seu navegador.
 
-- Meta tags básicas ficam no componente [Layout.astro](file:///home/diego/projetos/astro-event-invite-template/src/components/Layout.astro).
-- Sitemap é gerado via `@astrojs/sitemap`.
+## ⚙️ Personalização
 
-Antes de publicar, ajuste o domínio em `site` dentro de [astro.config.mjs](file:///home/diego/projetos/astro-event-invite-template/astro.config.mjs):
+Toda a configuração de conteúdo está centralizada na pasta `src/config/`. Você não precisa mexer no código HTML/CSS para alterar textos básicos.
 
+### 1. Dados do Evento
+Edite o arquivo [`src/config/event.ts`](src/config/event.ts) para alterar:
+- Nome do aniversariante/evento.
+- Data e hora (para a contagem regressiva).
+- Localização e endereço.
+- Link do RSVP (ex: seu formulário do Google).
+
+### 2. Galeria de Fotos
+1.  Adicione suas fotos na pasta `public/images/gallery/`.
+2.  Atualize a lista de arquivos no arquivo [`src/config/gallery.ts`](src/config/gallery.ts).
+
+### 3. SEO e URL
+Antes de publicar, ajuste o domínio do seu site no arquivo [`astro.config.mjs`](astro.config.mjs):
 ```js
-site: 'https://seu-dominio.com'
+export default defineConfig({
+  site: 'https://www.seuevento.com.br', // <-- Altere aqui
+  // ...
+});
 ```
 
-## Deploy no cPanel (HostGator) — build estático
+## 📦 Build e Deploy
 
-1. Rode o build local:
+Este projeto gera um site **100% estático**. Isso significa que você pode hospedá-lo em **qualquer** provedor de hospedagem (Vercel, Netlify, Hostgator, Hostinger, AWS S3, GitHub Pages, etc.).
+
+### Gerar versão final
+
+Execute o comando de build:
 
 ```bash
 npm run build
 ```
 
-2. No seu computador, abra a pasta `dist/`.
-3. No cPanel > File Manager, entre em `public_html/`.
-4. Envie o conteúdo de `dist/` para `public_html/` (os arquivos e pastas dentro de `dist/`, não a pasta `dist` em si).
-5. Acesse seu domínio e valide as páginas:
-   - `/`
-   - `/detalhes`
-   - `/galeria`
-   - `/confirmar`
-   - `/contato`
+Isso criará uma pasta chamada `dist/` na raiz do projeto.
 
-## RSVP (Google Forms)
+### Como Publicar
 
-Troque o placeholder do link em `event.rsvp.externalUrl` (arquivo `src/config/event.ts`).
+- **Vercel / Netlify:** Conecte seu repositório Git e ele detectará o Astro automaticamente.
+- **Hospedagem Tradicional (cPanel, FTP):**
+  1. Gere o build (`npm run build`).
+  2. Pegue **todo o conteúdo** de dentro da pasta `dist/`.
+  3. Faça upload para a pasta pública do seu servidor (geralmente `public_html` ou `www`).
 
-## Formatação (Prettier)
+## 📂 Estrutura do Projeto
 
-```bash
-npm run format
+```text
+├── public/            # Arquivos estáticos (imagens, favicon, robots.txt)
+├── src/
+│   ├── components/    # Componentes reutilizáveis (.astro)
+│   ├── config/        # ⚙️ Configurações do site (Edite aqui!)
+│   ├── layouts/       # Layouts base das páginas
+│   ├── pages/         # Rotas do site (index, galeria, etc.)
+│   └── styles/        # CSS global
+├── astro.config.mjs   # Configuração do Astro
+├── package.json       # Dependências e scripts
+└── tailwind.config.mjs # Configuração do Tailwind
 ```
+
+---
+
+Desenvolvido com 💜 usando [Astro](https://astro.build).

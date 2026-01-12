@@ -1,7 +1,16 @@
 {
   "name": "astro-event-invite-template",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "A simple event invite template using Astro",
+  "keywords": [
+    "astro",
+    "tailwindcss",
+    "sitemap"
+  ],
+  "author": "Diego de Oliveira Braga",
+  "license": "MIT",
+  "email": "diegobraga7@gmail.com",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
