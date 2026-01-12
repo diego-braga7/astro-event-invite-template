@@ -7,26 +7,26 @@ const { targetDate } = Astro.props;
 ---
 
 <div class="countdown-container py-8 text-center" data-target={targetDate}>
-  <h3 class="text-2xl mb-4 text-sonic-blue drop-shadow-md">Contagem Regressiva</h3>
-  <div class="flex justify-center gap-4 sm:gap-8 font-game text-sonic-red">
-    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
-      <span class="days text-3xl sm:text-5xl block drop-shadow-md">00</span>
-      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">DIAS</span>
+  <h3 class="text-xl sm:text-2xl mb-4 text-sonic-blue drop-shadow-md">Contagem Regressiva</h3>
+  <div class="flex flex-wrap justify-center gap-2 sm:gap-8 font-game text-sonic-red">
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-1 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[60px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="days text-2xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-[10px] sm:text-sm text-sonic-blue font-sans font-bold">DIAS</span>
     </div>
-    <div class="separator text-2xl sm:text-4xl text-sonic-gold mt-1">:</div>
-    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
-      <span class="hours text-3xl sm:text-5xl block drop-shadow-md">00</span>
-      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">HORAS</span>
+    <div class="separator text-xl sm:text-4xl text-sonic-gold mt-1 self-center sm:self-auto">:</div>
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-1 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[60px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="hours text-2xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-[10px] sm:text-sm text-sonic-blue font-sans font-bold">HORAS</span>
     </div>
-    <div class="separator text-2xl sm:text-4xl text-sonic-gold mt-1">:</div>
-    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
-      <span class="minutes text-3xl sm:text-5xl block drop-shadow-md">00</span>
-      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">MIN</span>
+    <div class="separator text-xl sm:text-4xl text-sonic-gold mt-1 self-center sm:self-auto">:</div>
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-1 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[60px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="minutes text-2xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-[10px] sm:text-sm text-sonic-blue font-sans font-bold">MIN</span>
     </div>
-    <div class="separator text-2xl sm:text-4xl text-sonic-gold mt-1">:</div>
-    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
-      <span class="seconds text-3xl sm:text-5xl block drop-shadow-md">00</span>
-      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">SEG</span>
+    <div class="separator text-xl sm:text-4xl text-sonic-gold mt-1 self-center sm:self-auto">:</div>
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-1 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[60px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="seconds text-2xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-[10px] sm:text-sm text-sonic-blue font-sans font-bold">SEG</span>
     </div>
   </div>
 </div>

@@ -11,19 +11,28 @@ const links = [
 ];
 ---
 
-<header class="border-b border-slate-200 bg-white/80 backdrop-blur">
-  <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
-    <a href="/" class="font-display text-lg no-underline hover:no-underline">
+<header class="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-40">
+  <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 relative">
+    <a href="/" class="font-display text-lg no-underline hover:no-underline z-50 relative">
       {event.nome_da_crianca} {event.idade}
     </a>
-    <nav class="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-sm">
+
+    <!-- Botão Menu Mobile -->
+    <button id="menu-toggle" class="sm:hidden z-50 p-2 text-sonic-blue focus:outline-none" aria-label="Menu">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+
+    <!-- Menu Desktop & Mobile Wrapper -->
+    <nav id="nav-menu" class="fixed inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center gap-6 text-xl transition-transform duration-300 translate-x-full sm:translate-x-0 sm:static sm:flex-row sm:bg-transparent sm:text-sm sm:justify-end sm:gap-x-4 sm:gap-y-2 sm:backdrop-blur-none h-dvh sm:h-auto">
       {links.map((link) => {
         const isActive = pathname === link.href;
         return (
           <a
             href={link.href}
             class:list={[
-              'rounded-lg px-2 py-1 no-underline hover:bg-slate-900/5 hover:no-underline',
+              'rounded-lg px-4 py-2 sm:px-2 sm:py-1 no-underline hover:bg-slate-900/5 hover:no-underline font-bold sm:font-normal',
               isActive ? 'text-primary' : 'text-slate-700'
             ]}
           >
@@ -34,4 +43,23 @@ const links = [
     </nav>
   </div>
 </header>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  const navLinks = navMenu?.querySelectorAll('a');
+
+  menuToggle?.addEventListener('click', () => {
+    navMenu?.classList.toggle('translate-x-full');
+    document.body.classList.toggle('overflow-hidden'); // Previne scroll quando menu aberto
+  });
+
+  // Fecha o menu ao clicar em um link
+  navLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu?.classList.add('translate-x-full');
+      document.body.classList.remove('overflow-hidden');
+    });
+  });
+</script>
 
