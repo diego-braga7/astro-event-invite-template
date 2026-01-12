@@ -1,0 +1,26 @@
+@config "../../tailwind.config.mjs";
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background text-slate-900 antialiased font-sans;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-slate-900;
+  }
+
+  a {
+    @apply underline-offset-4;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+}
