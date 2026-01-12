@@ -4,7 +4,7 @@ export interface GalleryImage {
 }
 
 export const gallery: GalleryImage[] = [
-  { src: '/images/gallery/foto-01.svg', alt: 'Foto 1 (placeholder)' },
+  { src: 'https://photos.app.goo.gl/vEW6ZbZ4qNxa2v3N6', alt: 'Foto 1 (placeholder)' },
   { src: '/images/gallery/foto-02.svg', alt: 'Foto 2 (placeholder)' },
   { src: '/images/gallery/foto-03.svg', alt: 'Foto 3 (placeholder)' },
   { src: '/images/gallery/foto-04.svg', alt: 'Foto 4 (placeholder)' },

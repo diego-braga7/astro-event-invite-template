@@ -32,15 +32,26 @@ const canonicalUrl = Astro.url.toString();
     <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
+
+    <!-- Google Fonts for Sonic Theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Righteous&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-dvh">
+    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-50">
+       <!-- Decorative background rings -->
+       <div class="absolute top-20 left-10 w-24 h-24 border-8 border-sonic-gold/20 rounded-full animate-pulse"></div>
+       <div class="absolute bottom-40 right-10 w-32 h-32 border-8 border-sonic-gold/20 rounded-full animate-bounce delay-1000"></div>
+       <div class="absolute top-1/2 left-1/4 w-16 h-16 border-4 border-sonic-blue/10 rounded-full"></div>
+    </div>
+
     <div class="flex min-h-dvh flex-col">
       <Header />
-      <main class="flex-1">
+      <main class="flex-1 relative">
         <slot />
       </main>
       <Footer />
     </div>
   </body>
 </html>
-

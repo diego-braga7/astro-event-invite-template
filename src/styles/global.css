@@ -7,13 +7,15 @@
   }
 
   body {
-    @apply bg-background text-slate-900 antialiased font-sans;
+    @apply bg-sonic-gradient text-slate-900 antialiased font-sans min-h-screen relative overflow-x-hidden;
+    background-image: theme('backgroundImage.sonic-gradient'), theme('backgroundImage.speed-pattern');
+    background-attachment: fixed;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-display text-slate-900;
+    @apply font-display text-sonic-blue uppercase tracking-wider drop-shadow-sm;
   }
 
   a {

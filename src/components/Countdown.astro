@@ -1,0 +1,108 @@
+---
+interface Props {
+  targetDate: string; // ISO string format (e.g. 2023-12-25T00:00:00)
+}
+
+const { targetDate } = Astro.props;
+---
+
+<div class="countdown-container py-8 text-center" data-target={targetDate}>
+  <h3 class="text-2xl mb-4 text-sonic-blue drop-shadow-md">Contagem Regressiva</h3>
+  <div class="flex justify-center gap-4 sm:gap-8 font-game text-sonic-red">
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="days text-3xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">DIAS</span>
+    </div>
+    <div class="separator text-2xl sm:text-4xl text-sonic-gold mt-1">:</div>
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="hours text-3xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">HORAS</span>
+    </div>
+    <div class="separator text-2xl sm:text-4xl text-sonic-gold mt-1">:</div>
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="minutes text-3xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">MIN</span>
+    </div>
+    <div class="separator text-2xl sm:text-4xl text-sonic-gold mt-1">:</div>
+    <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-lg border-b-4 border-sonic-blue min-w-[70px] sm:min-w-[100px] skew-x-[-5deg]">
+      <span class="seconds text-3xl sm:text-5xl block drop-shadow-md">00</span>
+      <span class="label text-xs sm:text-sm text-sonic-blue font-sans font-bold">SEG</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  class CountdownController {
+    container: HTMLElement;
+    targetDate: number;
+    elements: {
+      days: HTMLElement | null;
+      hours: HTMLElement | null;
+      minutes: HTMLElement | null;
+      seconds: HTMLElement | null;
+    };
+    interval: number | undefined;
+
+    constructor(container: HTMLElement) {
+      this.container = container;
+      const dateStr = container.dataset.target;
+      if (!dateStr) return;
+      
+      // Tentar fazer parse da data (DD/MM/YYYY) para ISO se necessário
+      // O formato esperado em event.ts é DD/MM/YYYY
+      const [day, month, year] = dateStr.split('T')[0].split('/');
+      // Se vier do config/event.ts como DD/MM/YYYY, ajustamos.
+      // Caso contrário assume ISO.
+      if (day && month && year && year.length === 4) {
+          this.targetDate = new Date(`${year}-${month}-${day}T00:00:00`).getTime();
+      } else {
+          this.targetDate = new Date(dateStr).getTime();
+      }
+
+      this.elements = {
+        days: container.querySelector('.days'),
+        hours: container.querySelector('.hours'),
+        minutes: container.querySelector('.minutes'),
+        seconds: container.querySelector('.seconds'),
+      };
+
+      this.start();
+    }
+
+    update() {
+      const now = new Date().getTime();
+      const distance = this.targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(this.interval);
+        if (this.container) this.container.innerHTML = '<h3 class="text-3xl text-sonic-gold font-game animate-bounce">É HOJE!</h3>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      if (this.elements.days) this.elements.days.innerText = String(days).padStart(2, '0');
+      if (this.elements.hours) this.elements.hours.innerText = String(hours).padStart(2, '0');
+      if (this.elements.minutes) this.elements.minutes.innerText = String(minutes).padStart(2, '0');
+      if (this.elements.seconds) this.elements.seconds.innerText = String(seconds).padStart(2, '0');
+    }
+
+    start() {
+      this.update();
+      this.interval = setInterval(() => this.update(), 1000) as unknown as number;
+    }
+  }
+
+  // Inicializa todos os countdowns na página
+  document.addEventListener('astro:page-load', () => {
+      const countdowns = document.querySelectorAll('.countdown-container');
+      countdowns.forEach(c => new CountdownController(c as HTMLElement));
+  });
+  
+  // Fallback para quando não há View Transitions ou primeira carga
+  const countdowns = document.querySelectorAll('.countdown-container');
+  countdowns.forEach(c => new CountdownController(c as HTMLElement));
+</script>

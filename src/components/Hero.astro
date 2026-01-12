@@ -1,39 +1,97 @@
 ---
 import Button from './Button.astro';
 import { event } from '../config/event';
+import Countdown from './Countdown.astro';
 
 export interface Props {
   ctaHref: string;
 }
 
 const { ctaHref } = Astro.props;
+
+// Converter DD/MM/YYYY para YYYY-MM-DD para o componente
+const [day, month, year] = event.data.split('/');
+const isoDate = `${year}-${month}-${day}T${event.horario}:00`;
 ---
 
-<section class="mx-auto max-w-5xl px-4 py-12">
-  <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-10">
-    <p class="text-sm font-medium text-slate-600">Convite</p>
-    <h1 class="mt-2 text-3xl font-display sm:text-4xl">
-      Aniversário do {event.nome_da_crianca}, {event.idade} anos
-    </h1>
-    <p class="mt-4 max-w-2xl text-slate-700">{event.texto_convite}</p>
-    <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-      <Button href={ctaHref} variant="primary" size="lg">Confirmar presença</Button>
-      <Button href="/detalhes" variant="ghost" size="lg">Ver detalhes</Button>
+<section class="relative mx-auto max-w-5xl px-4 py-12 overflow-hidden">
+  
+  <!-- Sonic Animation Layer -->
+  <div class="sonic-runner absolute top-0 left-[-100px] w-24 h-24 z-10 pointer-events-none hidden sm:block">
+      <!-- Simple CSS representation or placeholder SVG -->
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
+          <circle cx="50" cy="50" r="45" fill="#1E90FF" />
+          <path d="M50 20 L80 50 L50 80" stroke="white" stroke-width="8" fill="none" />
+          <path d="M30 35 L60 50 L30 65" stroke="white" stroke-width="8" fill="none" />
+      </svg>
+      <div class="speed-lines"></div>
+  </div>
+
+  <div class="relative z-0 rounded-3xl border-4 border-sonic-gold bg-white/90 p-7 shadow-[0_10px_0_rgb(0,0,0,0.2)] sm:p-10 transform transition-transform hover:scale-[1.01] duration-300">
+    
+    <!-- Decorative Rings -->
+    <div class="absolute -top-6 -right-6 w-16 h-16 text-sonic-gold animate-bounce delay-700 hidden sm:block">
+        <svg viewBox="0 0 50 50" class="w-full h-full drop-shadow-md">
+            <circle cx="25" cy="25" r="20" stroke="currentColor" stroke-width="6" fill="none" />
+        </svg>
     </div>
-    <dl class="mt-8 grid gap-4 sm:grid-cols-3">
-      <div>
-        <dt class="text-xs uppercase tracking-wide text-slate-500">Data</dt>
-        <dd class="mt-1 font-medium text-slate-900">{event.data}</dd>
+
+    <div class="text-center mb-8">
+        <p class="text-lg font-bold text-sonic-red tracking-widest uppercase mb-2 animate-pulse">Prepare-se!</p>
+        <h1 class="mt-2 text-4xl sm:text-6xl font-game text-sonic-blue drop-shadow-[4px_4px_0_#000000]">
+          FELIZ ANIVERSÁRIO!
+        </h1>
+        <div class="text-2xl sm:text-3xl font-display text-sonic-gold mt-2 drop-shadow-sm stroke-black">
+             {event.nome_da_crianca} • {event.idade} ANOS
+        </div>
+    </div>
+
+    <Countdown targetDate={isoDate} />
+
+    <p class="mt-6 max-w-2xl mx-auto text-slate-700 text-center text-lg leading-relaxed">
+      {event.texto_convite}
+    </p>
+
+    <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center">
+      <Button href={ctaHref} variant="primary" size="lg" class="animate-bounce-slow">
+        CONFIRMAR PRESENÇA
+      </Button>
+      <Button href="/detalhes" variant="ghost" size="lg">
+        VER DETALHES
+      </Button>
+    </div>
+
+    <dl class="mt-10 grid gap-4 sm:grid-cols-3 text-center border-t-2 border-dashed border-slate-300 pt-6">
+      <div class="bg-blue-50 p-4 rounded-xl transform rotate-1">
+        <dt class="text-xs uppercase tracking-wide text-sonic-blue font-bold">Data</dt>
+        <dd class="mt-1 font-display text-xl text-slate-900">{event.data}</dd>
       </div>
-      <div>
-        <dt class="text-xs uppercase tracking-wide text-slate-500">Horário</dt>
-        <dd class="mt-1 font-medium text-slate-900">{event.horario}</dd>
+      <div class="bg-red-50 p-4 rounded-xl transform -rotate-1">
+        <dt class="text-xs uppercase tracking-wide text-sonic-red font-bold">Horário</dt>
+        <dd class="mt-1 font-display text-xl text-slate-900">{event.horario}</dd>
       </div>
-      <div>
-        <dt class="text-xs uppercase tracking-wide text-slate-500">Cidade</dt>
-        <dd class="mt-1 font-medium text-slate-900">{event.cidade}</dd>
+      <div class="bg-yellow-50 p-4 rounded-xl transform rotate-1">
+        <dt class="text-xs uppercase tracking-wide text-yellow-600 font-bold">Cidade</dt>
+        <dd class="mt-1 font-display text-xl text-slate-900">{event.cidade}</dd>
       </div>
     </dl>
   </div>
 </section>
 
+<style>
+  /* Sonic Run Animation */
+  @keyframes run-across {
+    0% { left: -150px; transform: skewX(-20deg); }
+    50% { left: 50%; transform: skewX(-20deg); }
+    100% { left: 120%; transform: skewX(-20deg); }
+  }
+
+  .sonic-runner {
+    animation: run-across 3s ease-in-out infinite;
+    animation-delay: 1s; /* Espera carregar um pouco */
+  }
+
+  .animate-bounce-slow {
+      animation: bounce 2s infinite;
+  }
+</style>
