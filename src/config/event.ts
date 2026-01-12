@@ -1,5 +1,9 @@
 export type RsvpMode = 'external' | 'api';
 
+function parseRsvpMode(value: unknown): RsvpMode | undefined {
+  return value === 'external' || value === 'api' ? value : undefined;
+}
+
 export interface EventConfig {
   nome_da_crianca: string;
   idade: number;
@@ -17,6 +21,8 @@ export interface EventConfig {
   };
 }
 
+const env = import.meta.env;
+
 export const event: EventConfig = {
   nome_da_crianca: 'Nome da Criança',
   idade: 5,
@@ -24,14 +30,17 @@ export const event: EventConfig = {
   horario: '00:00',
   endereco: 'Rua Exemplo, 123 — Bairro',
   cidade: 'Sua Cidade — UF',
-  google_maps_link: 'https://maps.google.com/?q=SEU_ENDERECO_AQUI',
-  whatsapp_link: 'https://wa.me/5599999999999?text=Olá!%20Quero%20confirmar%20presença.',
+  google_maps_link: env.PUBLIC_EVENT_GOOGLE_MAPS_LINK ?? 'https://maps.google.com/?q=SEU_ENDERECO_AQUI',
+  whatsapp_link:
+    env.PUBLIC_EVENT_WHATSAPP_LINK ??
+    'https://wa.me/5599999999999?text=Olá!%20Quero%20confirmar%20presença.',
   texto_convite:
+    env.PUBLIC_EVENT_TEXTO_CONVITE ??
     'Você está convidado(a) para um aniversário super especial! Em breve, este texto será ajustado com o seu template.',
   rsvp: {
-    mode: 'external',
-    externalUrl: 'https://forms.gle/SEU_FORM_AQUI',
-    apiEndpointPlaceholder: 'https://SEU-DOMINIO.com/api/rsvp'
+    mode: parseRsvpMode(env.PUBLIC_RSVP_MODE) ?? 'external',
+    externalUrl: env.PUBLIC_RSVP_EXTERNAL_URL ?? 'https://forms.gle/SEU_FORM_AQUI',
+    apiEndpointPlaceholder:
+      env.PUBLIC_RSVP_API_ENDPOINT_PLACEHOLDER ?? 'https://SEU-DOMINIO.com/api/rsvp'
   }
 };
-
